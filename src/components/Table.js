@@ -30,6 +30,9 @@ export default function Tables(props) {
   const handleHover = () => {
     setHoverd(!hoverd);
   };
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
   const style1 = {
     color: "red",
     border: "none",
@@ -70,6 +73,15 @@ export default function Tables(props) {
               </TableBody>
             </Table>
           </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[10, 25, 100]}
+            component="div"
+            count={props.data.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
         </Paper>
       </div>
     );
