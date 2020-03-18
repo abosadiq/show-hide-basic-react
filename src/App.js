@@ -27,7 +27,7 @@ class App extends Component {
   };
   getData = async () => {
     const response = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts   "
+      "https://jsonplaceholder.typicode.com/posts"
     );
     const result = response.data;
     console.log(result);
