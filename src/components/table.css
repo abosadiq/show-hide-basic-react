@@ -1,0 +1,6 @@
+.btn {
+  color: red;
+}
+.btn:hover {
+  color: aqua;
+}
