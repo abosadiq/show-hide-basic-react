@@ -3,7 +3,6 @@ import logo from "./logo.svg";
 import "./App.css";
 import Table from "./components/Table";
 import axios from "axios";
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +11,12 @@ class App extends Component {
       show: false
     };
   }
+  haddelDelete = id => {
+    let del = this.state.data.filter(de => de.id !== id);
+    this.setState({
+      data: del
+    });
+  };
   componentDidMount() {
     this.getData();
   }
@@ -37,6 +42,7 @@ class App extends Component {
           data={this.state.data}
           showTable={this.showTable}
           show={this.state.show}
+          haddelDelete={this.haddelDelete}
         />
       </div>
     );

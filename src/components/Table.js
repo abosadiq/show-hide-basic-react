@@ -8,6 +8,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
+import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { Animated } from "react-animated-css";
 const useStyles = makeStyles({
   root: {
@@ -59,6 +60,7 @@ export default function Tables(props) {
                 <TableRow>
                   <TableCell align="center">Title</TableCell>
                   <TableCell align="center">Body</TableCell>
+                  <TableCell align="center">Delete</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -68,6 +70,18 @@ export default function Tables(props) {
                     <TableRow>
                       <TableCell align="center">{d.title}</TableCell>
                       <TableCell align="center">{d.body}</TableCell>
+                      <TableCell align="center">
+                        <button
+                          style={{
+                            border: "none",
+                            color: "red",
+                            outline: "none"
+                          }}
+                          onClick={props.haddelDelete.bind(this, d.id)}
+                        >
+                          <DeleteForeverIcon />
+                        </button>
+                      </TableCell>
                     </TableRow>
                   ))}
               </TableBody>
