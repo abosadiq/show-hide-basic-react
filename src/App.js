@@ -1,51 +1,37 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
+import React from "react";
 import "./App.css";
 import Table from "./components/Table";
-import axios from "axios";
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: [],
-      show: false
-    };
-  }
-  haddelDelete = id => {
-    let del = this.state.data.filter(de => de.id !== id);
-    this.setState({
-      data: del
-    });
-  };
-  componentDidMount() {
-    this.getData();
-  }
-  showTable = () => {
-    this.setState({
-      show: !this.state.show
-    });
-  };
-  getData = async () => {
-    const response = await axios.get(
-      "https://jsonplaceholder.typicode.com/posts   "
-    );
-    const result = response.data;
-    console.log(result);
-    this.setState({
-      data: result
-    });
-  };
-  render() {
-    return (
-      <div className="App">
-        <Table
-          data={this.state.data}
-          showTable={this.showTable}
-          show={this.state.show}
-          haddelDelete={this.haddelDelete}
-        />
-      </div>
-    );
-  }
-}
+
+const App = () => {
+  return <Table />;
+};
+// feching API with Function Component
+// const App = () => {
+//   const [data, setData] = React.useState([]);
+//   const [show, setShow] = React.useState(false);
+//   React.useEffect(() => {
+//     getData();
+//   }, []);
+//   const getData = () => {
+//     axios
+//       .get("https://jsonplaceholder.typicode.com/posts")
+//       .then(response => setData(response.data.slice(0, 50)))
+//       .catch(err => console.log(err));
+//   };
+//   const haddelDelete = id => {
+//     setData(data => data.filter(d => d.id !== id));
+//   };
+//   const showTable = () => {
+//     setShow(!show);
+//   };
+//   return (
+//     <Table
+//       data={data}
+//       showTable={showTable}
+//       show={show}
+//       haddelDelete={haddelDelete}
+//     />
+//   );
+// };
+
 export default App;

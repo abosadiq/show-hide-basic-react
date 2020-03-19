@@ -10,15 +10,17 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import { Animated } from "react-animated-css";
+import Hoc from "./Hoc";
+import HocWClass from "../HocWClass";
 const useStyles = makeStyles({
   root: {
     width: "100%"
   },
   container: {
-    maxHeight: 540
+    maxHeight: 500
   }
 });
-export default function Tables(props) {
+function Tables(props) {
   const classes = useStyles();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -52,14 +54,16 @@ export default function Tables(props) {
   let show_table = null;
   if (!props.show) {
     show_table = (
-      <div style={{ width: "80%", margin: "10px auto" }}>
+      <Hoc style={{ width: "80%", margin: "10px auto" }}>
         <Paper className={classes.root}>
           <TableContainer className={classes.container}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
+                  <TableCell align="center">Id</TableCell>
                   <TableCell align="center">Title</TableCell>
                   <TableCell align="center">Body</TableCell>
+                  <TableCell align="center">userId</TableCell>
                   <TableCell align="center">Delete</TableCell>
                 </TableRow>
               </TableHead>
@@ -67,9 +71,11 @@ export default function Tables(props) {
                 {props.data
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map(d => (
-                    <TableRow>
+                    <TableRow key={d.id}>
+                      <TableCell align="center">{d.id}</TableCell>
                       <TableCell align="center">{d.title}</TableCell>
                       <TableCell align="center">{d.body}</TableCell>
+                      <TableCell align="center">{d.userId}</TableCell>
                       <TableCell align="center">
                         <button
                           style={{
@@ -77,7 +83,7 @@ export default function Tables(props) {
                             color: "red",
                             outline: "none"
                           }}
-                          onClick={props.haddelDelete.bind(this, d.id)}
+                          onClick={() => props.haddelDelete(d.id)}
                         >
                           <DeleteForeverIcon />
                         </button>
@@ -97,20 +103,20 @@ export default function Tables(props) {
             onChangeRowsPerPage={handleChangeRowsPerPage}
           />
         </Paper>
-      </div>
+      </Hoc>
     );
   } else {
     show_table = null;
   }
   return (
-    <div>
+    <Hoc>
       <button
         style={hoverd ? style2 : style1}
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
         onClick={props.showTable}
       >
-        Show/Hide
+        {props.show ? "Hide Data" : "Show Data"}
       </button>
       <Animated
         animationIn="fadeInLeftBig"
@@ -121,6 +127,7 @@ export default function Tables(props) {
       >
         {show_table}
       </Animated>
-    </div>
+    </Hoc>
   );
 }
+export default HocWClass(Tables);
